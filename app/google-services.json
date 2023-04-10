@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1062726150418",
+    "project_id": "licenta-a0365",
+    "storage_bucket": "licenta-a0365.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062726150418:android:136a4e1f2f844d6e186bcb",
+        "android_client_info": {
+          "package_name": "com.example.diamondbarbers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062726150418-mptfqs1gu2h06uc5dk23mfvllhnmhqll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.diamondbarbers",
+            "certificate_hash": "113d3039cbccfa3db13d4487780f3a87e280ce96"
+          }
+        },
+        {
+          "client_id": "1062726150418-0qrphtqau0rjmdip68h59vl5of2g3589.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOnq4tP66otbhLcL9h37412U2O9fdQB8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062726150418-0qrphtqau0rjmdip68h59vl5of2g3589.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
