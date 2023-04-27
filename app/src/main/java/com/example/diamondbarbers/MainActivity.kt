@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             val bundle = Bundle()
             bundle.putString("phone", phone)
 
+
             intent.putExtras(bundle)
 
             startActivity(intent)

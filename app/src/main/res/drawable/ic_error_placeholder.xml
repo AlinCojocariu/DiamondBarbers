@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FF0000" /> <!-- Set the desired background color for the error placeholder -->
+    <!-- You can customize the shape and appearance of the error placeholder as needed -->
+</shape>

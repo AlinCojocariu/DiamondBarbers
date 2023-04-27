@@ -30,7 +30,12 @@ class FrizerieAdapter(private val context: Context, private val frizerieList:Arr
 
         // Add click listener to the item view
         holder.itemView.setOnClickListener {
-            val intent = Intent (context,MainActivity::class.java)
+            val intent = Intent (context,HairStylistsActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelable("barbershop",frizerie)
+            intent.putExtras(bundle)
+
+            intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK
 
             context.startActivity(intent)
         }

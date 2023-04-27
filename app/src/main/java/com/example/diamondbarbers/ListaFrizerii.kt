@@ -37,8 +37,9 @@ class ListaFrizerii : AppCompatActivity() {
                     val address = barbershopSnapshot.child("address").value as String
                     val city = barbershopSnapshot.child("city").value as String
                     val hairstylistList = mutableListOf<HairStylist>()
-                    for (hairstylistSnapshot in barbershopSnapshot.child("hairstylist").children) {
+                    for (hairstylistSnapshot in barbershopSnapshot.child("hairstylists").children) {
                         val hairstylistName = hairstylistSnapshot.child("name").value as String
+                        val image = hairstylistSnapshot.child("image").value as String
                         val phone = hairstylistSnapshot.child("phone").value as String
                         val servicesList = mutableListOf<Services>()
                         for (serviceSnapshot in hairstylistSnapshot.child("services").children){
@@ -60,7 +61,7 @@ class ListaFrizerii : AppCompatActivity() {
 
                         }
 
-                        val hairStylist = HairStylist(hairstylistName,phone,servicesList,appointmentsList)
+                        val hairStylist = HairStylist(hairstylistName,image,phone,servicesList,appointmentsList)
                         hairstylistList.add(hairStylist)
                     }
                    val barberShop = Frizerie(name,address,city,hairstylistList)
@@ -73,7 +74,7 @@ class ListaFrizerii : AppCompatActivity() {
 
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Toast.makeText(applicationContext,error.toString(),Toast.LENGTH_SHORT).show()
             }
 
         })
