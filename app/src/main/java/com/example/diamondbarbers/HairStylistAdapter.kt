@@ -1,6 +1,8 @@
 package com.example.diamondbarbers
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +33,14 @@ class HairStylistAdapter(private val context:Context, private val hairStylistLis
 
         // Handle item click
         holder.itemView.setOnClickListener {
+            val intent = Intent(context,CalendarActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelable("hairstylist",hairStylist)
+            intent.putExtras(bundle)
+
+            intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK
+
+            context.startActivity(intent)
 
         }
 
