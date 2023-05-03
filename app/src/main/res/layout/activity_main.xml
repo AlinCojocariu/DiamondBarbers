@@ -16,44 +16,63 @@
         android:hint="Nr.Telefon"
         android:inputType="phone"
         android:textColorHint="#757575"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintTop_toBottomOf="@id/numeClient"
+        app:layout_constraintVertical_bias="0.421"
         tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/numeClient"
         android:layout_width="290dp"
         android:layout_height="50dp"
+        android:autofillHints=""
         android:gravity="center"
-        android:inputType="textPersonName"
         android:hint="Numele tau"
+        android:inputType="textPersonName"
         android:textColorHint="#757575"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="HardcodedText"
-        android:autofillHints="" />
-
-    <Button
-        android:id="@+id/Salveaza"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="salveaza"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.913"
+        app:layout_constraintVertical_bias="0.281"
         tools:ignore="HardcodedText" />
 
+    <Button
+        android:id="@+id/trimitereCod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TrimitereCod"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="35dp"
+        app:layout_constraintTop_toBottomOf="@id/nrTelefon"
+        tools:ignore="HardcodedText" />
 
+    <EditText
+        android:id="@+id/introducereCod"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="123456"
+        android:gravity="center"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/trimitereCod"
+        android:layout_marginTop="70dp"/>
+
+    <Button
+        android:id="@+id/verificareCod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="VerificareCod"
+        app:layout_constraintTop_toBottomOf="@+id/introducereCod"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="35dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
