@@ -50,7 +50,7 @@ class ListaFrizerii : AppCompatActivity() {
                             servicesList.add(service)
                         }
                         val appointmentsList = mutableListOf<Appointments>()
-                        for(appointmentsSnapshot in hairstylistSnapshot.child("programri").children){
+                        for(appointmentsSnapshot in hairstylistSnapshot.child("programari").children){
                             val date = appointmentsSnapshot.child("date").value as String
                             val hour = appointmentsSnapshot.child("hour").value as String
                             val appointmentName = appointmentsSnapshot.child("name").value as String
