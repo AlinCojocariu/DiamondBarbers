@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class HairStylist(
+    var id: Int,
     var name: String,
     var image: String,
     var phone: String,
@@ -12,6 +13,7 @@ class HairStylist(
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+        parcel.readInt(),
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
@@ -20,6 +22,7 @@ class HairStylist(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
         parcel.writeString(name)
         parcel.writeString(image)
         parcel.writeString(phone)

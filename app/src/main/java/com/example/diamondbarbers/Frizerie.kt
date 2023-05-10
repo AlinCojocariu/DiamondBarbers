@@ -4,13 +4,15 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Frizerie(
-    var nume: String,
-    var adresa: String,
-    var oras: String,
+    var id: Int,
+    var name: String,
+    var address: String,
+    var city: String,
     var hairStylists: List<HairStylist>
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+        parcel.readInt(),
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
@@ -18,9 +20,10 @@ class Frizerie(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(nume)
-        parcel.writeString(adresa)
-        parcel.writeString(oras)
+        parcel.writeInt(id)
+        parcel.writeString(name)
+        parcel.writeString(address)
+        parcel.writeString(city)
         parcel.writeTypedList(hairStylists)
     }
 

@@ -1,4 +1,4 @@
-package com.example.diamondbarbers
+package com.example.diamondbarbers.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.diamondbarbers.R
+import com.example.diamondbarbers.activities.ReservationDialog
+import com.example.diamondbarbers.Services
 
 class ServiceAdapter(var context: Context, private val arrayList: List<Services>, var date: String, var hour: String, var hairStylist: String): RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder>() {
 
@@ -22,7 +25,7 @@ class ServiceAdapter(var context: Context, private val arrayList: List<Services>
         return arrayList.size
     }
 
-    override fun onBindViewHolder(holder: ServiceAdapter.ServiceViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ServiceViewHolder, position: Int) {
         val service = arrayList[position]
 
         holder.price.text = service.price

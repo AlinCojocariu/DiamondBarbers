@@ -1,22 +1,23 @@
-package com.example.diamondbarbers
+package com.example.diamondbarbers.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.LocaleList
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.diamondbarbers.*
+import com.example.diamondbarbers.adapters.CalendarAdapter
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.TextStyle
-import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.collections.ArrayList
 
+@Suppress("DEPRECATION")
 class CalendarActivity : AppCompatActivity() {
 
     private lateinit var hairStylist : HairStylist
@@ -30,23 +31,26 @@ class CalendarActivity : AppCompatActivity() {
     private lateinit var fridayButton: TextView
     private lateinit var saturdayButton: TextView
     private lateinit var sundayButton: TextView
-
+    private lateinit var hairstylistName:TextView
     private lateinit var monthNameTextView: TextView
 
     private var startDate = LocalDate.now().with(DayOfWeek.MONDAY)
     private var currentWeek = 0L
     private var currentDate = LocalDate.now()
 
+    private val LAST_WEEK_NUMBER = 51L      // 52 weeks. The number is 51 because we start from 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
-        var hairStylist_name =findViewById<TextView>(R.id.hairstylist_name)
+        hairstylistName =findViewById(R.id.hairstylist_name)
 
         val bundle = intent.extras
         if(bundle != null) {
             hairStylist = bundle.getParcelable("hairstylist")!!
-            hairStylist_name.text= "${hairStylist?.name}"
+            hairstylistName.text= "${hairStylist?.name}"
+
         } else {
             Toast.makeText(applicationContext, "Datele despre frizerie nu au fost primite", Toast.LENGTH_SHORT).show()
         }
@@ -80,7 +84,7 @@ class CalendarActivity : AppCompatActivity() {
             updateCurrentDay()
 
             updateUI(startDate.plusWeeks(currentWeek))
-            if(currentWeek == 15L)
+            if(currentWeek == LAST_WEEK_NUMBER)
                 rightArrowView.visibility = View.GONE
         }
 
@@ -99,7 +103,9 @@ class CalendarActivity : AppCompatActivity() {
 
         mondayButton.setOnClickListener {
             clearAllButtons()
-            mondayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
+            mondayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
 
             currentDate = startDate.plusWeeks(currentWeek)
             updateCurrentDay()
@@ -107,7 +113,9 @@ class CalendarActivity : AppCompatActivity() {
 
         tuesdayButton.setOnClickListener {
             clearAllButtons()
-            tuesdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
+            tuesdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
 
             currentDate = startDate.plusWeeks(currentWeek).plusDays(1)
             updateCurrentDay()
@@ -115,7 +123,9 @@ class CalendarActivity : AppCompatActivity() {
 
         wednesdayButton.setOnClickListener {
             clearAllButtons()
-            wednesdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
+            wednesdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
 
             currentDate = startDate.plusWeeks(currentWeek).plusDays(2)
             updateCurrentDay()
@@ -123,7 +133,9 @@ class CalendarActivity : AppCompatActivity() {
 
         thursdayButton.setOnClickListener {
             clearAllButtons()
-            thursdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
+            thursdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
 
             currentDate = startDate.plusWeeks(currentWeek).plusDays(3)
             updateCurrentDay()
@@ -131,7 +143,9 @@ class CalendarActivity : AppCompatActivity() {
 
         fridayButton.setOnClickListener {
             clearAllButtons()
-            fridayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
+            fridayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
 
             currentDate = startDate.plusWeeks(currentWeek).plusDays(4)
             updateCurrentDay()
@@ -139,7 +153,9 @@ class CalendarActivity : AppCompatActivity() {
 
         saturdayButton.setOnClickListener {
             clearAllButtons()
-            saturdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
+            saturdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
 
             currentDate = startDate.plusWeeks(currentWeek).plusDays(5)
             updateCurrentDay()
@@ -147,23 +163,50 @@ class CalendarActivity : AppCompatActivity() {
 
         sundayButton.setOnClickListener {
             clearAllButtons()
-            sundayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
+            sundayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
 
             currentDate = startDate.plusWeeks(currentWeek).plusDays(6)
             updateCurrentDay()
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        // Get the updated hairstylist
+        // In case of an appointment, the new appointment should appear in the Calendar list
+        if(UserInformation.currentHairStylist != null)
+            hairStylist = UserInformation.currentHairStylist!!
+
+        updateCurrentDay()
+    }
+
     private fun colorStartDate() {
         val period = Period.between(startDate, currentDate)
         when(period.days) {
-            0 -> mondayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
-            1 -> tuesdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
-            2 -> wednesdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
-            3 -> thursdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
-            4 -> fridayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
-            5 -> saturdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
-            6 -> sundayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
+            0 -> mondayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
+            1 -> tuesdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
+            2 -> wednesdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
+            3 -> thursdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
+            4 -> fridayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
+            5 -> saturdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
+            6 -> sundayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
+                R.color.purple_500
+            ))
         }
     }
 

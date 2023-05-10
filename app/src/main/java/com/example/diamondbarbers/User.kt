@@ -1,7 +1,3 @@
 package com.example.diamondbarbers
 
-class User ( var name:String ="",
-            var phone:String ="" )
-
-{
-}
+data class User(val name:String, val phone:String)

@@ -1,4 +1,4 @@
-package com.example.diamondbarbers
+package com.example.diamondbarbers.activities
 
 
 import android.content.Intent
@@ -6,7 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+import com.example.diamondbarbers.*
+import com.example.diamondbarbers.R
 import com.google.firebase.database.*
 
 
@@ -52,15 +53,11 @@ class MainActivity : AppCompatActivity() {
                 val userId = newRef.key
                // Toast.makeText(applicationContext, userId, Toast.LENGTH_LONG).show()
             }
-
+            UserInformation.userInfo = User(name, phone)
             val intent = Intent(this, ListaFrizerii::class.java)
 
             val bundle = Bundle()
-            bundle.putString("phone", phone)
-
-
             intent.putExtras(bundle)
-
             startActivity(intent)
 
         }
