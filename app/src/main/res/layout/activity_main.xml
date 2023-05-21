@@ -21,13 +21,13 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/numeClient"
-        app:layout_constraintVertical_bias="0.421"
+
         tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/numeClient"
-        android:layout_width="290dp"
-        android:layout_height="50dp"
+        android:layout_width="293dp"
+        android:layout_height="48dp"
         android:autofillHints=""
         android:gravity="center"
         android:hint="Numele tau"
@@ -55,19 +55,21 @@
     <EditText
         android:id="@+id/introducereCod"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="123456"
+        android:layout_height="50dp"
+        android:hint="123456"
         android:gravity="center"
-
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/trimitereCod"
-        android:layout_marginTop="70dp"/>
+        android:layout_marginTop="70dp"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/verificareCod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="VerificareCod"
         app:layout_constraintTop_toBottomOf="@+id/introducereCod"

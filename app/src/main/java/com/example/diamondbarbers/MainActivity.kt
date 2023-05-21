@@ -2,11 +2,12 @@ package com.example.diamondbarbers
 
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -14,8 +15,9 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -28,16 +30,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var verifycode: Button
     private lateinit var databaseRef: DatabaseReference
     private lateinit var auth:FirebaseAuth
-    private var storedVerificationId: String?= ""
+    private lateinit var storedVerificationId: String
     private lateinit var resedToken:PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks:PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    var wrongAttempts = 3
 
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-      //  FirebaseApp.initializeApp(this)
+       FirebaseApp.initializeApp(this)
         numeClient = findViewById(R.id.numeClient)
         nrTelefon = findViewById(R.id.nrTelefon)
         introducereCod = findViewById(R.id.introducereCod)
@@ -45,16 +48,50 @@ class MainActivity : AppCompatActivity() {
         verifycode=findViewById(R.id.verificareCod)
         databaseRef = FirebaseDatabase.getInstance().getReference("clients")
 
-            auth = Firebase.auth
+            auth = FirebaseAuth.getInstance()
+
+
         
         sendcode.setOnClickListener {
-            startPhoneNumberVerification(nrTelefon!!.text.toString())
+            startPhoneNumberVerification(nrTelefon.text.toString().trim())
+            introducereCod.visibility = View.VISIBLE
+            verifycode.visibility = View.VISIBLE
 
 
         }
 
         verifycode.setOnClickListener{
-            verifyPhoneNumberWithCode(storedVerificationId,introducereCod!!.text.toString())
+            verifyPhoneNumberWithCode(storedVerificationId, introducereCod.text.toString().trim())
+
+//            var lockoutTime: Date? = null
+//            if(wrongAttempts!=0) {
+//                wrongAttempts--
+//                if (wrongAttempts == 0) {
+//                    lockoutTime = Date()
+//                    // Adaugă o oră la marcajul de timp pentru a stabili momentul în care pauza se termină
+//                    lockoutTime!!.time +=  3 * 1000
+//                    // Ascunde butonul
+//                    introducereCod.visibility=View.GONE
+//                    verifycode.visibility = View.GONE
+//                }
+//            }
+//
+//            //Log.w(TAG,"signInWithCredential:failure",task.exception)
+//            // if(task.exception is FirebaseAuthInvalidCredentialsException){
+//
+//            //}
+//            val handler = Handler()
+//            handler.postDelayed({
+//                if (lockoutTime != null && Date().after(lockoutTime)) {
+//                    // Resetarea variabilelor
+//                    wrongAttempts = 3
+//                    lockoutTime = null
+//                    // Afișarea butonului
+//                    introducereCod.visibility=View.VISIBLE
+//                    verifycode.visibility = View.VISIBLE
+//                }
+//            },3 * 1000)  // Verifică la fiecare oră
+//
         }
 
 
@@ -89,14 +126,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val currentUser=auth.currentUser
-        updateUI(currentUser)
+        //val currentUser=auth.currentUser
+       // updateUI(currentUser)
 
+//        var currentUser = auth.currentUser
+//        if(currentUser != null) {
+//            startActivity(Intent(applicationContext, ListaFrizerii::class.java))
+//            finish()
+//        }
+//        auth.signOut()
     }
 
     private fun startPhoneNumberVerification(phoneNumber: String){
         val options =PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phoneNumber)
+            .setPhoneNumber("+4$phoneNumber")
             .setTimeout(60L,TimeUnit.SECONDS)
             .setActivity(this)
             .setCallbacks(callbacks)
@@ -111,29 +154,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun signInWithPhoneAuthCredential(credential:PhoneAuthCredential){
+
+
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) {task ->
                 if(task.isSuccessful){
                     Log.d(TAG,"signInWithCredential:success")
 
-                    val user=task.result?.user
-                    Toast.makeText(this,"Welcome to the jungle :"+user,Toast.LENGTH_SHORT).show()
+                    //val user=task.result?.user
+                    //Toast.makeText(this,"Welcome to the jungle :"+user,Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(applicationContext, ListaFrizerii::class.java))
 
                 }
                 else
                 {
-                    Log.w(TAG,"signInWithCredential:failure",task.exception)
-                    if(task.exception is FirebaseAuthInvalidCredentialsException){
-
-                    }
+                    //Toast.makeText(applicationContext, "Cod incorect\nNumarul de incercari ramase este: $wrongAttempts", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Cod incorect", Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
-    private fun updateUI(user: FirebaseUser? =auth.currentUser)
-    {
-
-    }
+//    private fun updateUI(user: FirebaseUser? =auth.currentUser)
+//    {
+//
+//    }
 
     companion object{
         private const val TAG="MainActivity"
