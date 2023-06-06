@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.HairstylistProfileActivity">
+
+    <ImageView
+        android:id="@+id/hairstylist_picture"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/hairstylist_name"
+        android:src="@drawable/ic_error_placeholder"
+        android:layout_marginTop="10dp" />
+
+    <View
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/diamond"
+        app:layout_constraintBottom_toBottomOf="@+id/hairstylist_picture"
+        app:layout_constraintEnd_toStartOf="@+id/hairstylist_picture"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/diamond"
+        app:layout_constraintBottom_toBottomOf="@+id/hairstylist_picture"
+        app:layout_constraintStart_toEndOf="@+id/hairstylist_picture"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hairstylist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="MbappeGOOOOOOOLL"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/hairstylist_picture"
+        app:layout_constraintStart_toStartOf="@+id/hairstylist_picture"
+        app:layout_constraintTop_toBottomOf="@+id/hairstylist_picture"
+        app:layout_constraintBottom_toTopOf="@id/hairstylist_phone"/>
+
+    <TextView
+        android:id="@+id/hairstylist_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0775265855"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hairstylist_name"
+        app:layout_constraintBottom_toTopOf="@id/productsView"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+
+    <TextView
+        android:id="@+id/productsView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Produse utilizate:"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="@+id/hairstylist_phone"
+        app:layout_constraintStart_toStartOf="@+id/hairstylist_phone"
+        app:layout_constraintTop_toBottomOf="@id/hairstylist_phone"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productsRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/productsView"
+        app:layout_constraintStart_toStartOf="@+id/productsView"
+        app:layout_constraintTop_toBottomOf="@+id/productsView"
+        android:layout_marginTop="5dp"
+        tools:listitem="@layout/card_products"/>
+
+    <TextView
+        android:id="@+id/galleryView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:text="Galerie:"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/photos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/productsRecycler"
+        />
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/photos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/galleryView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
