@@ -1,75 +1,114 @@
 package com.example.diamondbarbers.activities
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import com.google.firebase.FirebaseApp
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.*
+import com.google.firebase.auth.FirebaseAuth
 import com.example.diamondbarbers.*
 import com.example.diamondbarbers.R
 import com.google.firebase.database.*
-
-
+import java.util.*
+import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
 
     private lateinit var numeClient: EditText
     private lateinit var nrTelefon: EditText
-    private lateinit var salveaza: Button
+    private lateinit var introducereCod: EditText
+    private lateinit var sendcode: Button
+    private lateinit var verifycode: Button
     private lateinit var databaseRef: DatabaseReference
+    private lateinit var auth: FirebaseAuth
+    private lateinit var storedVerificationId: String
+    private lateinit var resedToken: PhoneAuthProvider.ForceResendingToken
+    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
-
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         numeClient = findViewById(R.id.numeClient)
         nrTelefon = findViewById(R.id.nrTelefon)
-        salveaza = findViewById(R.id.Salveaza)
+        introducereCod = findViewById(R.id.introducereCod)
+        sendcode = findViewById(R.id.trimitereCod)
+        verifycode = findViewById(R.id.verificareCod)
+
         databaseRef = FirebaseDatabase.getInstance().getReference("clients")
-        salveaza.setOnClickListener {
-            saveClient()
+
+        FirebaseApp.initializeApp(this)
+        auth = FirebaseAuth.getInstance()
+
+        sendcode.setOnClickListener {
+            startPhoneNumberVerification(nrTelefon.text.toString().trim())
+            introducereCod.visibility = View.VISIBLE
+            verifycode.visibility = View.VISIBLE
+        }
+
+        verifycode.setOnClickListener {
+            verifyPhoneNumberWithCode(storedVerificationId, introducereCod.text.toString().trim())
+        }
+
+
+        callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                signInWithPhoneAuthCredential(credential)
+            }
+
+            override fun onVerificationFailed(e: FirebaseException) {
+                if (e is FirebaseAuthInvalidCredentialsException) {
+                } else if (e is FirebaseTooManyRequestsException) {
+                }
+            }
+
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
+                storedVerificationId = verificationId
+                resedToken = token
+            }
 
         }
     }
 
-    private fun saveClient() {
-        val name = numeClient.text.toString().trim()
-        val phone = nrTelefon.text.toString().trim()
+    private fun startPhoneNumberVerification(phoneNumber: String) {
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber("+4$phoneNumber")
+            .setTimeout(60L, TimeUnit.SECONDS)
+            .setActivity(this)
+            .setCallbacks(callbacks)
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
+    }
 
-        if (name.isEmpty()) {
-            numeClient.error = "insert you'r name"
-            return
-        }
+    private fun verifyPhoneNumberWithCode(verificationId: String?, code: String) {
+        val credential = PhoneAuthProvider.getCredential(verificationId!!, code)
+        signInWithPhoneAuthCredential(credential)
+    }
 
-        if (phone.isEmpty()) {
-            nrTelefon.error = "insert phone number"
-            return
-        }
-
-        if (name.isNotEmpty() && phone.isNotEmpty()) {
-
-            val newRef = databaseRef.push()
-            newRef.setValue(User(name, phone)).addOnCompleteListener {
-                val userId = newRef.key
-               // Toast.makeText(applicationContext, userId, Toast.LENGTH_LONG).show()
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    UserInformation.userInfo =
+                        User(numeClient.text.toString(), nrTelefon.text.toString())
+                    startActivity(Intent(applicationContext, ListaFrizerii::class.java))
+                } else {
+                    Toast.makeText(applicationContext, "Cod incorect", Toast.LENGTH_SHORT).show()
+                }
             }
-            UserInformation.userInfo = User(name, phone)
-            val intent = Intent(this, ListaFrizerii::class.java)
-
-            val bundle = Bundle()
-            intent.putExtras(bundle)
-            startActivity(intent)
-
-        }
-//        //val clientId = databaseRef.push().key!!
-//
-//        val client = Client("4",name, phone)
-//        databaseRef.child("4").setValue(client).addOnCompleteListener{
-//            Toast.makeText(this,"salvat cu succes",Toast.LENGTH_LONG).show()
-//        }
-//            .addOnFailureListener{ err->
-//                Toast.makeText(this,"eroare ${err.message}",Toast.LENGTH_LONG).show()
-//            }
-
     }
 }
+
+

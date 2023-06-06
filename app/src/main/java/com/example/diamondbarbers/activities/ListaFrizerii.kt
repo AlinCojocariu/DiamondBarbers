@@ -21,15 +21,6 @@ class ListaFrizerii : AppCompatActivity() {
 
         recyclerView=findViewById(R.id.frizeriiRecyclerView)
 
-        val bundle = intent.extras
-        if(bundle != null) {
-
-            intent.putExtras(bundle)
-        } else {
-            Toast.makeText(applicationContext, "Numarul de telefon sau numele nu poate fi luat", Toast.LENGTH_SHORT).show()
-        }
-
-       // Toast.makeText(applicationContext, phone, Toast.LENGTH_SHORT).show()
         val frizeriiRef = FirebaseDatabase.getInstance().getReference("barber-shops")
         frizeriiRef.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

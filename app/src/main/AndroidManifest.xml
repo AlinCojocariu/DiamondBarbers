@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DiamondBarbers">
         <activity
+            android:name=".VerificationCodeActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.HairstylistProfileActivity"
             android:exported="false" />
         <activity
