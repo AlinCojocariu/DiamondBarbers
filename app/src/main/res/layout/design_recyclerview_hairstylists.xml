@@ -22,13 +22,15 @@
 
         <TextView
             android:id="@+id/hairstylist_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="Nume frizer"
             android:textColor="@color/black"
             android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/hairstylist_image"
+            app:layout_constraintStart_toStartOf="@+id/hairstylist_image"
             app:layout_constraintTop_toBottomOf="@id/hairstylist_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
