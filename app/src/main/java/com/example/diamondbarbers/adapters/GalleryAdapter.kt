@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
-import com.example.diamondbarbers.GlideAppModule
+import com.example.diamondbarbers.models.GlideAppModule
 import com.example.diamondbarbers.R
 
 class GalleryAdapter(private val context: Context, private val imageList: List<String>) : PagerAdapter() {

@@ -11,12 +11,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diamondbarbers.activities.CalendarActivity
-import com.example.diamondbarbers.GlideAppModule
-import com.example.diamondbarbers.HairStylist
+import com.example.diamondbarbers.models.GlideAppModule
+import com.example.diamondbarbers.models.HairStylist
 import com.example.diamondbarbers.R
 import com.example.diamondbarbers.UserInformation
 
-class HairStylistAdapter(private val context:Context, private val hairStylistList:List<HairStylist>):RecyclerView.Adapter<HairStylistAdapter.ImageViewHolder>() {
+class HairstylistAdapter(private val context:Context, private val hairStylistList:List<HairStylist>):RecyclerView.Adapter<HairstylistAdapter.ImageViewHolder>() {
 
     class ImageViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
         val image: ImageView = itemView.findViewById(R.id.hairstylist_image)
@@ -24,7 +24,7 @@ class HairStylistAdapter(private val context:Context, private val hairStylistLis
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.design_recyclerview_hairstylists,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_hairstylist,parent,false)
         return ImageViewHolder(itemView)
     }
 

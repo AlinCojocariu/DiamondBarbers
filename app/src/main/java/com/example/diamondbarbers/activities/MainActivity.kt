@@ -5,8 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -18,6 +16,7 @@ import com.google.firebase.auth.*
 import com.google.firebase.auth.FirebaseAuth
 import com.example.diamondbarbers.*
 import com.example.diamondbarbers.R
+import com.example.diamondbarbers.models.User
 import com.google.firebase.database.*
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -103,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     UserInformation.userInfo =
                         User(numeClient.text.toString(), nrTelefon.text.toString())
-                    startActivity(Intent(applicationContext, ListaFrizerii::class.java))
+                    startActivity(Intent(applicationContext, BarbershopsActivity::class.java))
                 } else {
                     Toast.makeText(applicationContext, "Cod incorect", Toast.LENGTH_SHORT).show()
                 }

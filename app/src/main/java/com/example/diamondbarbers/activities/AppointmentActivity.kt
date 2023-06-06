@@ -8,8 +8,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diamondbarbers.GlideAppModule
-import com.example.diamondbarbers.HairStylist
+import com.example.diamondbarbers.models.GlideAppModule
+import com.example.diamondbarbers.models.HairStylist
 import com.example.diamondbarbers.R
 import com.example.diamondbarbers.UserInformation
 import com.example.diamondbarbers.adapters.ServiceAdapter

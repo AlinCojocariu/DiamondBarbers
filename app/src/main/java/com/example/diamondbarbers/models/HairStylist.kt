@@ -1,4 +1,4 @@
-package com.example.diamondbarbers
+package com.example.diamondbarbers.models
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -8,9 +8,9 @@ class HairStylist(
     var name: String,
     var image: String,
     var phone: String,
-    var services: List<Services>,
-    var appointments: List<Appointments>,
-    var products: List<Products>,
+    var services: List<Service>,
+    var appointments: List<Appointment>,
+    var products: List<Product>,
     var gallery: List<String>
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -18,9 +18,9 @@ class HairStylist(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.createTypedArrayList(Services.CREATOR)!!,
-        parcel.createTypedArrayList(Appointments.CREATOR)!!,
-        parcel.createTypedArrayList(Products.CREATOR)!!,
+        parcel.createTypedArrayList(Service)!!,
+        parcel.createTypedArrayList(Appointment.CREATOR)!!,
+        parcel.createTypedArrayList(Product)!!,
         parcel.createStringArrayList()!!
     )
 

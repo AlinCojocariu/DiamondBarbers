@@ -1,9 +1,9 @@
-package com.example.diamondbarbers
+package com.example.diamondbarbers.models
 
 import android.os.Parcel
 import android.os.Parcelable
 
-class Services(
+class Service(
     var price: String,
     var time: String,
     var type: String
@@ -25,12 +25,12 @@ class Services(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Services> {
-        override fun createFromParcel(parcel: Parcel): Services {
-            return Services(parcel)
+    companion object CREATOR : Parcelable.Creator<Service> {
+        override fun createFromParcel(parcel: Parcel): Service {
+            return Service(parcel)
         }
 
-        override fun newArray(size: Int): Array<Services?> {
+        override fun newArray(size: Int): Array<Service?> {
             return arrayOfNulls(size)
         }
     }

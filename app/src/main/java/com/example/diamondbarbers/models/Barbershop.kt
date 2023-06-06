@@ -1,9 +1,9 @@
-package com.example.diamondbarbers
+package com.example.diamondbarbers.models
 
 import android.os.Parcel
 import android.os.Parcelable
 
-class Frizerie(
+class Barbershop(
     var id: Int,
     var name: String,
     var address: String,
@@ -16,7 +16,7 @@ class Frizerie(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.createTypedArrayList(HairStylist.CREATOR)!!
+        parcel.createTypedArrayList(HairStylist)!!
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -31,12 +31,12 @@ class Frizerie(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Frizerie> {
-        override fun createFromParcel(parcel: Parcel): Frizerie {
-            return Frizerie(parcel)
+    companion object CREATOR : Parcelable.Creator<Barbershop> {
+        override fun createFromParcel(parcel: Parcel): Barbershop {
+            return Barbershop(parcel)
         }
 
-        override fun newArray(size: Int): Array<Frizerie?> {
+        override fun newArray(size: Int): Array<Barbershop?> {
             return arrayOfNulls(size)
         }
     }

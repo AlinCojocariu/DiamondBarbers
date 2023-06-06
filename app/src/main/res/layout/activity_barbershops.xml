@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ListaFrizerii">
+    tools:context=".activities.BarbershopsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/frizeriiRecyclerView"
@@ -12,6 +12,6 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/design_recycleview_frizerii"
+        tools:listitem="@layout/card_barbershop"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

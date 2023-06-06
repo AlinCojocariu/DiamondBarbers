@@ -14,9 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DiamondBarbers">
         <activity
-            android:name=".VerificationCodeActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.HairstylistProfileActivity"
             android:exported="false" />
         <activity
@@ -26,10 +23,10 @@
             android:name=".activities.CalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.HairStylistsActivity"
+            android:name=".activities.HairstylistsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ListaFrizerii"
+            android:name=".activities.BarbershopsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -85,7 +85,7 @@
         app:layout_constraintStart_toStartOf="@+id/productsView"
         app:layout_constraintTop_toBottomOf="@+id/productsView"
         android:layout_marginTop="5dp"
-        tools:listitem="@layout/card_products"/>
+        tools:listitem="@layout/card_product"/>
 
     <TextView
         android:id="@+id/galleryView"

@@ -13,22 +13,22 @@ import android.widget.TextView
 
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diamondbarbers.Frizerie
-import com.example.diamondbarbers.activities.HairStylistsActivity
+import com.example.diamondbarbers.models.Barbershop
+import com.example.diamondbarbers.activities.HairstylistsActivity
 import com.example.diamondbarbers.R
 import com.example.diamondbarbers.UserInformation
 
-class FrizerieAdapter(private val context: Context, private val frizerieList:ArrayList<Frizerie>): RecyclerView.Adapter<FrizerieAdapter.FrizerieViewHolder>() {
+class BarbershopAdapter(private val context: Context, private val barbershopList:ArrayList<Barbershop>): RecyclerView.Adapter<BarbershopAdapter.FrizerieViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): FrizerieViewHolder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.design_recycleview_frizerii, parent, false)
+        val view= LayoutInflater.from(parent.context).inflate(R.layout.card_barbershop, parent, false)
         return FrizerieViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: FrizerieViewHolder, position: Int) {
-        val frizerie = frizerieList[position]
+        val frizerie = barbershopList[position]
 
         holder.name.text=frizerie.name
         holder.address.text=frizerie.address
@@ -45,7 +45,7 @@ class FrizerieAdapter(private val context: Context, private val frizerieList:Arr
         holder.itemView.setOnClickListener {
 
 
-            val intent = Intent (context, HairStylistsActivity::class.java)
+            val intent = Intent (context, HairstylistsActivity::class.java)
             val bundle = Bundle()
             bundle.putParcelable("barbershop",frizerie)
             intent.putExtras(bundle)
@@ -60,7 +60,7 @@ class FrizerieAdapter(private val context: Context, private val frizerieList:Arr
     }
 
     override fun getItemCount(): Int {
-        return frizerieList.size
+        return barbershopList.size
     }
 
     class FrizerieViewHolder(myView: View):RecyclerView.ViewHolder(myView){

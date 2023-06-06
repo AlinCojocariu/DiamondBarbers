@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diamondbarbers.*
 import com.example.diamondbarbers.activities.AppointmentActivity
+import com.example.diamondbarbers.models.CalendarSchedule
+import com.example.diamondbarbers.models.HairStylist
 
 class CalendarAdapter(private val context: Context, private val arrayList: ArrayList<CalendarSchedule>, var hairStylist: HairStylist): RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
 

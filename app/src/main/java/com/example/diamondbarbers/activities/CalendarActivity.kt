@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diamondbarbers.*
 import com.example.diamondbarbers.adapters.CalendarAdapter
+import com.example.diamondbarbers.models.Appointment
+import com.example.diamondbarbers.models.CalendarSchedule
+import com.example.diamondbarbers.models.HairStylist
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Period
@@ -266,7 +269,7 @@ class CalendarActivity : AppCompatActivity() {
         while (startHour < 20) {
             list.add(
                 CalendarSchedule(
-                    appointment = Appointments(date.toString(), "$startHour:00", "", "", ""),
+                    appointment = Appointment(date.toString(), "$startHour:00", "", "", ""),
                     reserved = false
                 )
             )

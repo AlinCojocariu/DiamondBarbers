@@ -1,6 +1,5 @@
 package com.example.diamondbarbers.activities
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -9,11 +8,11 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import com.example.diamondbarbers.GlideAppModule
-import com.example.diamondbarbers.HairStylist
+import com.example.diamondbarbers.models.GlideAppModule
+import com.example.diamondbarbers.models.HairStylist
 import com.example.diamondbarbers.R
 import com.example.diamondbarbers.adapters.GalleryAdapter
-import com.example.diamondbarbers.adapters.HairstylistProductsAdapter
+import com.example.diamondbarbers.adapters.ProductAdapter
 
 class HairstylistProfileActivity : AppCompatActivity() {
 
@@ -21,7 +20,7 @@ class HairstylistProfileActivity : AppCompatActivity() {
     private lateinit var hairstylistName:TextView
     private lateinit var hairstylistPhone:TextView
     private lateinit var hairstylistPicture:ImageView
-    private lateinit var hairstylist:HairStylist
+    private lateinit var hairstylist: HairStylist
 
     private lateinit var gallery:ViewPager
 
@@ -52,7 +51,7 @@ class HairstylistProfileActivity : AppCompatActivity() {
         GlideAppModule.loadImage(applicationContext, hairstylist.image,hairstylistPicture)
 
         recyclerViewProducts.layoutManager = LinearLayoutManager(applicationContext)
-        recyclerViewProducts.adapter=HairstylistProductsAdapter(applicationContext,hairstylist.products)
+        recyclerViewProducts.adapter=ProductAdapter(applicationContext,hairstylist.products)
 
         val adapter=GalleryAdapter(this,hairstylist.gallery)
         gallery.adapter=adapter

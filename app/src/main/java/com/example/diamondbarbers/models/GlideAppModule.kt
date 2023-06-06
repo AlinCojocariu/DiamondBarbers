@@ -1,10 +1,12 @@
-package com.example.diamondbarbers
+package com.example.diamondbarbers.models
 
 import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
+import com.example.diamondbarbers.R
+
 @GlideModule
 class GlideAppModule:AppGlideModule() {
 

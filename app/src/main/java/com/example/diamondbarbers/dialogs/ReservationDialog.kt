@@ -1,4 +1,4 @@
-package com.example.diamondbarbers.activities
+package com.example.diamondbarbers.dialogs
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -13,12 +13,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.example.diamondbarbers.*
+import com.example.diamondbarbers.models.Appointment
+import com.example.diamondbarbers.models.Service
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class ReservationDialog(var date: String, var hour: String, var hairStylist: String, var service: Services): DialogFragment() {
+class ReservationDialog(var date: String, var hour: String, var hairStylist: String, var service: Service): DialogFragment() {
 
 
     private lateinit var userName:String
@@ -61,7 +63,7 @@ class ReservationDialog(var date: String, var hour: String, var hairStylist: Str
             reservationButton.setOnClickListener {
                 Toast.makeText(context, "Rezervat cu succes", Toast.LENGTH_SHORT).show()
 
-                val updateReservation = Appointments(
+                val updateReservation = Appointment(
                     date.text.toString(),
                     hour.text.toString(),
                     userName,
@@ -70,7 +72,7 @@ class ReservationDialog(var date: String, var hour: String, var hairStylist: Str
                 )
                 appointmentsRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val currentArray = dataSnapshot.value as MutableList<Appointments>
+                        val currentArray = dataSnapshot.value as MutableList<Appointment>
                         currentArray.add(updateReservation)
 
                         appointmentsRef.setValue(currentArray)

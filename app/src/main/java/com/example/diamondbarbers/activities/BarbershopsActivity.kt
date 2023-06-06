@@ -5,19 +5,19 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diamondbarbers.*
 import com.example.diamondbarbers.R
-import com.example.diamondbarbers.adapters.FrizerieAdapter
+import com.example.diamondbarbers.adapters.BarbershopAdapter
+import com.example.diamondbarbers.models.*
 import com.google.firebase.database.*
 
-class ListaFrizerii : AppCompatActivity() {
+class BarbershopsActivity : AppCompatActivity() {
 
 
-    private var barberShops = arrayListOf<Frizerie>()
+    private var barberShops = arrayListOf<Barbershop>()
     private lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lista_frizerii)
+        setContentView(R.layout.activity_barbershops)
 
         recyclerView=findViewById(R.id.frizeriiRecyclerView)
 
@@ -34,29 +34,29 @@ class ListaFrizerii : AppCompatActivity() {
                         val hairstylistName = hairstylistSnapshot.child("name").value as String
                         val image = hairstylistSnapshot.child("image").value as String
                         val phone = hairstylistSnapshot.child("phone").value as String
-                        val servicesList = mutableListOf<Services>()
+                        val serviceList = mutableListOf<Service>()
                         for (serviceSnapshot in hairstylistSnapshot.child("services").children){
                             val type = serviceSnapshot.child("type").value as String
                             val price = serviceSnapshot.child("price").value as String
                             val time = serviceSnapshot.child("time").value as String
-                            val service = Services (price,time,type)
-                            servicesList.add(service)
+                            val service = Service (price,time,type)
+                            serviceList.add(service)
                         }
-                        val appointmentsList = mutableListOf<Appointments>()
+                        val appointmentsList = mutableListOf<Appointment>()
                         for(appointmentsSnapshot in hairstylistSnapshot.child("programari").children){
                             val date = appointmentsSnapshot.child("date").value as String
                             val hour = appointmentsSnapshot.child("hour").value as String
                             val appointmentName = appointmentsSnapshot.child("name").value as String
                             val appointmentPhone = appointmentsSnapshot.child("phone").value as String
                             val type = appointmentsSnapshot.child("type").value as String
-                            val appointment = Appointments(date,hour,appointmentName,appointmentPhone,type)
+                            val appointment = Appointment(date,hour,appointmentName,appointmentPhone,type)
                             appointmentsList.add(appointment)
 
                         }
-                        val productsList= mutableListOf<Products>()
+                        val productsList= mutableListOf<Product>()
                          hairstylistSnapshot.child("products").children.forEachIndexed { productIndex, productSnapshot ->
                             val productName=productSnapshot.child("name").value.toString()
-                            val product=Products(productIndex,productName)
+                            val product= Product(productIndex,productName)
                             productsList.add(product)
                         }
                         val gallery= mutableListOf<String>()
@@ -65,15 +65,15 @@ class ListaFrizerii : AppCompatActivity() {
                             gallery.add(photo)
                         }
 
-                        val hairStylist = HairStylist(hairstylistIndex, hairstylistName,image,phone,servicesList,appointmentsList,productsList,gallery)
+                        val hairStylist = HairStylist(hairstylistIndex, hairstylistName,image,phone,serviceList,appointmentsList,productsList,gallery)
                         hairstylistList.add(hairStylist)
                     }
-                   val barberShop = Frizerie(barberShopIndex, name,address,city,hairstylistList)
+                   val barberShop = Barbershop(barberShopIndex, name,address,city,hairstylistList)
                     barberShops.add(barberShop)
 
                 }
                 recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-                recyclerView.adapter= FrizerieAdapter(applicationContext,barberShops)
+                recyclerView.adapter= BarbershopAdapter(applicationContext,barberShops)
             }
 
 

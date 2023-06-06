@@ -8,10 +8,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diamondbarbers.R
-import com.example.diamondbarbers.activities.ReservationDialog
-import com.example.diamondbarbers.Services
+import com.example.diamondbarbers.dialogs.ReservationDialog
+import com.example.diamondbarbers.models.Service
 
-class ServiceAdapter(var context: Context, private val arrayList: List<Services>, var date: String, var hour: String, var hairStylist: String): RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder>() {
+class ServiceAdapter(var context: Context, private val arrayList: List<Service>, var date: String, var hour: String, var hairStylist: String): RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

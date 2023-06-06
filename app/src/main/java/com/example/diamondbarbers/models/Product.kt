@@ -1,9 +1,9 @@
-package com.example.diamondbarbers
+package com.example.diamondbarbers.models
 
 import android.os.Parcel
 import android.os.Parcelable
 
-class Products(var index:Int ,var productName:String):Parcelable {
+class Product(var index:Int, var productName:String):Parcelable {
 
 //    operator fun get(position: Int): Any {
 //        return productsList[position]
@@ -33,12 +33,12 @@ class Products(var index:Int ,var productName:String):Parcelable {
         parcel.writeString(productName)
     }
 
-    companion object CREATOR : Parcelable.Creator<Products> {
-        override fun createFromParcel(parcel: Parcel): Products {
-            return Products(parcel)
+    companion object CREATOR : Parcelable.Creator<Product> {
+        override fun createFromParcel(parcel: Parcel): Product {
+            return Product(parcel)
         }
 
-        override fun newArray(size: Int): Array<Products?> {
+        override fun newArray(size: Int): Array<Product?> {
             return arrayOfNulls(size)
         }
     }

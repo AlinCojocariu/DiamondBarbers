@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/dialog_title"
         android:text="Detalii rezervare"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_width="match_parent"
