@@ -5,21 +5,16 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diamondbarbers.Appointments
-import com.example.diamondbarbers.Frizerie
-import com.example.diamondbarbers.HairStylist
+import com.example.diamondbarbers.*
 import com.example.diamondbarbers.R
-import com.example.diamondbarbers.Services
 import com.example.diamondbarbers.adapters.FrizerieAdapter
 import com.google.firebase.database.*
 
 class ListaFrizerii : AppCompatActivity() {
 
 
-    private var userPhone: String? = ""
     private var barberShops = arrayListOf<Frizerie>()
     private lateinit var recyclerView: RecyclerView
-     var userName:String?=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_frizerii)
@@ -67,8 +62,19 @@ class ListaFrizerii : AppCompatActivity() {
                             appointmentsList.add(appointment)
 
                         }
+                        val productsList= mutableListOf<Products>()
+                         hairstylistSnapshot.child("products").children.forEachIndexed { productIndex, productSnapshot ->
+                            val productName=productSnapshot.child("name").value.toString()
+                            val product=Products(productIndex,productName)
+                            productsList.add(product)
+                        }
+                        val gallery= mutableListOf<String>()
+                        for(gallerySnapshot in hairstylistSnapshot.child("gallery").children){
+                            val photo=gallerySnapshot.child("photo").value as String
+                            gallery.add(photo)
+                        }
 
-                        val hairStylist = HairStylist(hairstylistIndex, hairstylistName,image,phone,servicesList,appointmentsList)
+                        val hairStylist = HairStylist(hairstylistIndex, hairstylistName,image,phone,servicesList,appointmentsList,productsList,gallery)
                         hairstylistList.add(hairStylist)
                     }
                    val barberShop = Frizerie(barberShopIndex, name,address,city,hairstylistList)

@@ -1,10 +1,13 @@
 package com.example.diamondbarbers.activities
 
+import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,12 +37,15 @@ class CalendarActivity : AppCompatActivity() {
     private lateinit var hairstylistName:TextView
     private lateinit var monthNameTextView: TextView
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private var startDate = LocalDate.now().with(DayOfWeek.MONDAY)
     private var currentWeek = 0L
+    @RequiresApi(Build.VERSION_CODES.O)
     private var currentDate = LocalDate.now()
 
     private val LAST_WEEK_NUMBER = 51L      // 52 weeks. The number is 51 because we start from 0
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
@@ -49,10 +55,19 @@ class CalendarActivity : AppCompatActivity() {
         val bundle = intent.extras
         if(bundle != null) {
             hairStylist = bundle.getParcelable("hairstylist")!!
-            hairstylistName.text= "${hairStylist?.name}"
+            hairstylistName.text= hairStylist?.name
 
         } else {
-            Toast.makeText(applicationContext, "Datele despre frizerie nu au fost primite", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Datele despre frizer nu au fost primite", Toast.LENGTH_SHORT).show()
+        }
+
+        hairstylistName.setOnClickListener{
+            val intent = Intent(applicationContext,HairstylistProfileActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelable("hairstylist",hairStylist)
+            intent.putExtras(bundle)
+            startActivity(intent)
+
         }
 
         recyclerView = findViewById(R.id.recycler_view)
@@ -104,7 +119,7 @@ class CalendarActivity : AppCompatActivity() {
         mondayButton.setOnClickListener {
             clearAllButtons()
             mondayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
 
             currentDate = startDate.plusWeeks(currentWeek)
@@ -114,7 +129,7 @@ class CalendarActivity : AppCompatActivity() {
         tuesdayButton.setOnClickListener {
             clearAllButtons()
             tuesdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
 
             currentDate = startDate.plusWeeks(currentWeek).plusDays(1)
@@ -124,7 +139,7 @@ class CalendarActivity : AppCompatActivity() {
         wednesdayButton.setOnClickListener {
             clearAllButtons()
             wednesdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
 
             currentDate = startDate.plusWeeks(currentWeek).plusDays(2)
@@ -134,7 +149,7 @@ class CalendarActivity : AppCompatActivity() {
         thursdayButton.setOnClickListener {
             clearAllButtons()
             thursdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
 
             currentDate = startDate.plusWeeks(currentWeek).plusDays(3)
@@ -144,7 +159,7 @@ class CalendarActivity : AppCompatActivity() {
         fridayButton.setOnClickListener {
             clearAllButtons()
             fridayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
 
             currentDate = startDate.plusWeeks(currentWeek).plusDays(4)
@@ -154,7 +169,7 @@ class CalendarActivity : AppCompatActivity() {
         saturdayButton.setOnClickListener {
             clearAllButtons()
             saturdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
 
             currentDate = startDate.plusWeeks(currentWeek).plusDays(5)
@@ -164,7 +179,7 @@ class CalendarActivity : AppCompatActivity() {
         sundayButton.setOnClickListener {
             clearAllButtons()
             sundayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
 
             currentDate = startDate.plusWeeks(currentWeek).plusDays(6)
@@ -172,6 +187,7 @@ class CalendarActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
 
@@ -183,33 +199,35 @@ class CalendarActivity : AppCompatActivity() {
         updateCurrentDay()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun colorStartDate() {
         val period = Period.between(startDate, currentDate)
         when(period.days) {
             0 -> mondayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
             1 -> tuesdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
             2 -> wednesdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
             3 -> thursdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
             4 -> fridayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
             5 -> saturdayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
             6 -> sundayButton.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.purple_500
+                R.color.rose
             ))
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun updateUI(date: LocalDate) {
         mondayButton.text = date.dayOfMonth.toString()
         tuesdayButton.text = date.plusDays(1).dayOfMonth.toString()
@@ -218,6 +236,7 @@ class CalendarActivity : AppCompatActivity() {
         fridayButton.text = date.plusDays(4).dayOfMonth.toString()
         saturdayButton.text = date.plusDays(5).dayOfMonth.toString()
         sundayButton.text = date.plusDays(6).dayOfMonth.toString()
+
     }
 
     fun clearAllButtons() {
@@ -230,6 +249,7 @@ class CalendarActivity : AppCompatActivity() {
         sundayButton.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.black))
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun updateCurrentDay() {
         monthNameTextView.text = currentDate.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
 
@@ -242,8 +262,8 @@ class CalendarActivity : AppCompatActivity() {
 
     fun getInitList(date: LocalDate): ArrayList<CalendarSchedule> {
         val list = ArrayList<CalendarSchedule>()
-        var startHour = 10
-        while (startHour < 18) {
+        var startHour = 9
+        while (startHour < 20) {
             list.add(
                 CalendarSchedule(
                     appointment = Appointments(date.toString(), "$startHour:00", "", "", ""),

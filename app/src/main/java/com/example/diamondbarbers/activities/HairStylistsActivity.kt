@@ -24,7 +24,7 @@ class HairStylistsActivity : AppCompatActivity() {
 
         val bundle = intent.extras
         if(bundle != null) {
-            barbershop = bundle.getParcelable("barbershop")
+            barbershop = bundle.getParcelable("barbershop")!!
 
             intent.putExtras(bundle)
         } else {
