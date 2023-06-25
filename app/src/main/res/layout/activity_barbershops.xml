@@ -7,7 +7,7 @@
     tools:context=".activities.BarbershopsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/frizeriiRecyclerView"
+        android:id="@+id/barbershops_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

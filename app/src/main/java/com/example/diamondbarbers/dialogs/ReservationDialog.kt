@@ -54,10 +54,10 @@ class ReservationDialog(var date: String, var hour: String, var hairStylist: Str
         userPhone = userInfo!!.phone
 
         if(UserInformation.currentBarberShop != null && UserInformation.currentHairStylist != null) {
-            val barberShopListRef = FirebaseDatabase.getInstance().getReference("barber-shops")
+            val barberShopListRef = FirebaseDatabase.getInstance().getReference("barbershops")
             val barberShopRef = barberShopListRef.child("${UserInformation.currentBarberShop!!.id}")
             val hairstylistListRef = barberShopRef.child("hairstylists")
-            val appointmentsRef = hairstylistListRef.child("${UserInformation.currentHairStylist!!.id}").child("programari")
+            val appointmentsRef = hairstylistListRef.child("${UserInformation.currentHairStylist!!.id}").child("appointments")
 
 
             reservationButton.setOnClickListener {
@@ -87,6 +87,8 @@ class ReservationDialog(var date: String, var hour: String, var hairStylist: Str
 
                     override fun onCancelled(databaseError: DatabaseError) {
                         // Handle the error
+                        Toast.makeText(context, "Rezervarea nu a functionat", Toast.LENGTH_SHORT).show()
+
                     }
                 })
             }

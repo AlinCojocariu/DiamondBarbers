@@ -13,22 +13,25 @@
 
         <ImageView
             android:id="@+id/hairstylist_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.6"
             android:src="@drawable/ic_error_placeholder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/hairstylist_name"/>
 
         <TextView
             android:id="@+id/hairstylist_name"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:gravity="center"
             android:text="Nume frizer"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="@+id/hairstylist_image"
             app:layout_constraintStart_toStartOf="@+id/hairstylist_image"
             app:layout_constraintTop_toBottomOf="@id/hairstylist_image" />

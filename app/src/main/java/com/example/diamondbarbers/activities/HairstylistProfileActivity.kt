@@ -1,7 +1,9 @@
 package com.example.diamondbarbers.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -11,6 +13,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.diamondbarbers.models.GlideAppModule
 import com.example.diamondbarbers.models.HairStylist
 import com.example.diamondbarbers.R
+import com.example.diamondbarbers.UserInformation
 import com.example.diamondbarbers.adapters.GalleryAdapter
 import com.example.diamondbarbers.adapters.ProductAdapter
 
@@ -21,6 +24,7 @@ class HairstylistProfileActivity : AppCompatActivity() {
     private lateinit var hairstylistPhone:TextView
     private lateinit var hairstylistPicture:ImageView
     private lateinit var hairstylist: HairStylist
+    private lateinit var reservationButton: Button
 
     private lateinit var gallery:ViewPager
 
@@ -34,6 +38,7 @@ class HairstylistProfileActivity : AppCompatActivity() {
         hairstylistName=findViewById(R.id.hairstylist_name)
         hairstylistPhone=findViewById(R.id.hairstylist_phone)
         hairstylistPicture=findViewById(R.id.hairstylist_picture)
+        reservationButton=findViewById(R.id.reservation_button)
 
         gallery=findViewById(R.id.photos)
 
@@ -56,8 +61,14 @@ class HairstylistProfileActivity : AppCompatActivity() {
         val adapter=GalleryAdapter(this,hairstylist.gallery)
         gallery.adapter=adapter
 
+        reservationButton.setOnClickListener {
+         val intent = Intent(applicationContext,CalendarActivity::class.java)
 
-
+            val bundle = Bundle()
+            bundle.putParcelable("hairstylist",hairstylist)
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }
 
 
     }

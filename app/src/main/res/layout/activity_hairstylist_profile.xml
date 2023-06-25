@@ -43,7 +43,7 @@
         android:layout_margin="5dp"
         android:text="MbappeGOOOOOOOLL"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/hairstylist_picture"
         app:layout_constraintStart_toStartOf="@+id/hairstylist_picture"
         app:layout_constraintTop_toBottomOf="@+id/hairstylist_picture"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/hairstylist_name"
         app:layout_constraintBottom_toTopOf="@id/productsView"
         android:gravity="center"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textColor="@color/black"/>
 
 
@@ -91,7 +91,7 @@
         android:id="@+id/galleryView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:text="Galerie:"
         android:textColor="@color/black"
@@ -108,10 +108,21 @@
         android:id="@+id/photos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/reservation_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/galleryView" />
+
+    <Button
+        android:id="@+id/reservation_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Programare"
+        app:layout_constraintTop_toBottomOf="@id/photos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="10dp"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

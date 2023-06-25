@@ -8,7 +8,8 @@ class Barbershop(
     var name: String,
     var address: String,
     var city: String,
-    var hairStylists: List<HairStylist>
+    var hairStylists: List<HairStylist>,
+    var barbershopGallery: List<String>
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -16,7 +17,8 @@ class Barbershop(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.createTypedArrayList(HairStylist)!!
+        parcel.createTypedArrayList(HairStylist)!!,
+        parcel.createStringArrayList()!!
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -25,6 +27,7 @@ class Barbershop(
         parcel.writeString(address)
         parcel.writeString(city)
         parcel.writeTypedList(hairStylists)
+        parcel.writeStringList(barbershopGallery)
     }
 
     override fun describeContents(): Int {

@@ -90,7 +90,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/client_name"
-        app:layout_constraintBottom_toTopOf="@id/recycler_view"
         android:layout_marginTop="15dp"
         android:text="My phone "
         android:gravity="center"/>

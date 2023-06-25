@@ -22,40 +22,41 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var numeClient: EditText
-    private lateinit var nrTelefon: EditText
-    private lateinit var introducereCod: EditText
-    private lateinit var sendcode: Button
-    private lateinit var verifycode: Button
-    private lateinit var databaseRef: DatabaseReference
+    private lateinit var clientName: EditText
+    private lateinit var phoneNumber: EditText
+    private lateinit var insertCode: EditText
+    private lateinit var sendCode: Button
+    private lateinit var verifyCode: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var storedVerificationId: String
-    private lateinit var resedToken: PhoneAuthProvider.ForceResendingToken
+    private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        numeClient = findViewById(R.id.numeClient)
-        nrTelefon = findViewById(R.id.nrTelefon)
-        introducereCod = findViewById(R.id.introducereCod)
-        sendcode = findViewById(R.id.trimitereCod)
-        verifycode = findViewById(R.id.verificareCod)
+        clientName = findViewById(R.id.user_name)
+        phoneNumber = findViewById(R.id.phone_number)
+        insertCode = findViewById(R.id.insert_code)
+        sendCode = findViewById(R.id.send_code_button)
+        verifyCode = findViewById(R.id.check_code_button)
 
-        databaseRef = FirebaseDatabase.getInstance().getReference("clients")
 
         FirebaseApp.initializeApp(this)
         auth = FirebaseAuth.getInstance()
 
-        sendcode.setOnClickListener {
-            startPhoneNumberVerification(nrTelefon.text.toString().trim())
-            introducereCod.visibility = View.VISIBLE
-            verifycode.visibility = View.VISIBLE
+        sendCode.setOnClickListener {
+            startPhoneNumberVerification(phoneNumber.text.toString().trim())
+            insertCode.visibility = View.VISIBLE
+            verifyCode.visibility = View.VISIBLE
+//            UserInformation.userInfo =
+//                User(clientName.text.toString(), phoneNumber.text.toString())
+//            startActivity(Intent(applicationContext, BarbershopsActivity::class.java))
         }
 
-        verifycode.setOnClickListener {
-            verifyPhoneNumberWithCode(storedVerificationId, introducereCod.text.toString().trim())
+        verifyCode.setOnClickListener {
+            verifyPhoneNumberWithCode(storedVerificationId, insertCode.text.toString().trim())
         }
 
 
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                 token: PhoneAuthProvider.ForceResendingToken
             ) {
                 storedVerificationId = verificationId
-                resedToken = token
+                resendToken = token
             }
 
         }
@@ -101,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     UserInformation.userInfo =
-                        User(numeClient.text.toString(), nrTelefon.text.toString())
+                        User(clientName.text.toString(), phoneNumber.text.toString())
                     startActivity(Intent(applicationContext, BarbershopsActivity::class.java))
                 } else {
                     Toast.makeText(applicationContext, "Cod incorect", Toast.LENGTH_SHORT).show()

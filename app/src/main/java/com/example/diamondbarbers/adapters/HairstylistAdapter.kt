@@ -15,6 +15,7 @@ import com.example.diamondbarbers.models.GlideAppModule
 import com.example.diamondbarbers.models.HairStylist
 import com.example.diamondbarbers.R
 import com.example.diamondbarbers.UserInformation
+import com.example.diamondbarbers.activities.HairstylistProfileActivity
 
 class HairstylistAdapter(private val context:Context, private val hairStylistList:List<HairStylist>):RecyclerView.Adapter<HairstylistAdapter.ImageViewHolder>() {
 
@@ -39,7 +40,7 @@ class HairstylistAdapter(private val context:Context, private val hairStylistLis
 
         // Handle item click
         holder.itemView.setOnClickListener {
-            val intent = Intent(context, CalendarActivity::class.java)
+            val intent = Intent(context, HairstylistProfileActivity::class.java)
             val bundle = Bundle()
             bundle.putParcelable("hairstylist",hairStylist)
             intent.putExtras(bundle)
@@ -56,9 +57,8 @@ class HairstylistAdapter(private val context:Context, private val hairStylistLis
             // Load image with Glide using the valid context
             GlideAppModule.loadImage(context, hairStylist.image, holder.image)
 
-
         } else {
-            // Handle the case where the context is null or not valid
+
             Log.e("HairStylistAdapter", "Invalid context")
         }
 

@@ -12,7 +12,7 @@ import com.example.diamondbarbers.R
 class ProductAdapter(private val context: Context, private val productsList: List<Product>):RecyclerView.Adapter<ProductAdapter.HairstylistProductsViewHolder>() {
 
     inner class HairstylistProductsViewHolder(myView: View):RecyclerView.ViewHolder(myView){
-        val name:TextView=myView.findViewById(R.id.productName)
+        val name:TextView=myView.findViewById(R.id.product_name)
     }
 
     override fun onCreateViewHolder(

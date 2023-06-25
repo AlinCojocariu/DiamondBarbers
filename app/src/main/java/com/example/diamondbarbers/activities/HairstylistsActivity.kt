@@ -20,7 +20,7 @@ class HairstylistsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hairstylists)
 
-        recyclerView =findViewById(R.id.HairstylistsRecyclerView)
+        recyclerView =findViewById(R.id.hairstylists_recycler_view)
 
         val bundle = intent.extras
         if(bundle != null) {

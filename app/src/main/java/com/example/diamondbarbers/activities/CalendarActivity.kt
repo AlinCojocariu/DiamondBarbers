@@ -73,6 +73,9 @@ class CalendarActivity : AppCompatActivity() {
 
         }
 
+
+
+
         recyclerView = findViewById(R.id.recycler_view)
 
         monthNameTextView = findViewById(R.id.month_name)
@@ -291,4 +294,6 @@ class CalendarActivity : AppCompatActivity() {
         }
         return list
     }
+
+
 }
